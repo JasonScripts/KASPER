@@ -1,0 +1,152 @@
+{
+  "project_name": "QAKK Mobilalkalmazás és Munkaidő-nyilvántartó Rendszer",
+  "archetype": "ARCHETYPE 2: THE PERFORMANCE PRO / NORDIC INDUSTRIAL PRECISION",
+  "theme": "Dark High-Contrast Field Tactical Mode with Clean Danish Industrial Aesthetics",
+  "typography": {
+    "heading_font": "Outfit, sans-serif",
+    "body_font": "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+    "monospace_font": "JetBrains Mono, monospace",
+    "font_scale": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight",
+      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
+      "h3_card_title": "text-xl sm:text-2xl font-semibold tracking-tight",
+      "h4_label": "text-sm sm:text-base font-medium tracking-wide uppercase",
+      "body": "text-base leading-relaxed",
+      "small_caption": "text-xs font-mono uppercase tracking-wider"
+    }
+  },
+  "colors": {
+    "primary_background": "#0B0F19",
+    "card_background": "#111827",
+    "surface_border": "#1F2937",
+    "text_primary": "#F9FAFB",
+    "text_secondary": "#9CA3AF",
+    "text_muted": "#6B7280",
+    "online_emerald": {
+      "bg": "#059669",
+      "bg_hover": "#047857",
+      "glow": "rgba(16, 185, 129, 0.25)",
+      "text": "#10B981"
+    },
+    "offline_crimson": {
+      "bg": "#DC2626",
+      "bg_hover": "#B91C1C",
+      "glow": "rgba(239, 68, 68, 0.25)",
+      "text": "#EF4444"
+    },
+    "accent_amber_warning": {
+      "bg": "#D97706",
+      "text": "#F59E0B",
+      "glow": "rgba(245, 158, 11, 0.2)"
+    },
+    "brand_cobalt": {
+      "bg": "#2563EB",
+      "text": "#60A5FA"
+    }
+  },
+  "layout_and_grids": {
+    "worker_screen": {
+      "viewport": "100dvh full-screen mobile app layout (no outer scrollbars, sticky high-action triggers)",
+      "container_class": "flex flex-col justify-between min-h-[100dvh] max-w-md mx-auto p-6 bg-[#0B0F19] text-[#F9FAFB] relative overflow-hidden"
+    },
+    "admin_dashboard": {
+      "container_class": "min-h-screen bg-[#090D16] text-[#F9FAFB] flex flex-col md:flex-row font-sans",
+      "left_sidebar": "w-full md:w-80 lg:w-96 bg-[#0F172A] border-r border-[#1E293B] flex flex-col justify-between shrink-0 p-5",
+      "center_main_panel": "flex-1 flex flex-col p-6 space-y-8 overflow-y-auto bg-[#0B0F19]",
+      "bottom_table_section": "bg-[#111827] border border-[#1F2937] rounded-xl p-6 shadow-2xl"
+    }
+  },
+  "views_and_wireframes": {
+    "worker_screen": {
+      "login_state": {
+        "title": "QAKK Worker Login",
+        "description": "Minimalist, high-tactile mobile login with large input fields and full-width login button.",
+        "elements": [
+          "App Title & Danish Subtitle: QAKK Tidsregistrering",
+          "Email field with auto-capitalization disabled (data-testid='worker-login-email-input')",
+          "Password field with toggle visibility (data-testid='worker-login-password-input')",
+          "Language selector (EN / DA pill toggle)",
+          "Huge login CTA button: 'Indlogning / Login' (data-testid='worker-login-submit-button')"
+        ]
+      },
+      "offline_main_state": {
+        "title": "Worker Screen - Offline (Ready to Check-In)",
+        "elements": [
+          "Header: Greeting 'Hi, Kasper / Hej, Kasper', status badge 'Offline / Inaktiv' with grey indicator dot, and EN/DA toggle button (data-testid='worker-lang-toggle')",
+          "Inputs Section: Event Name ('Begivenhed / Event') and Client Name ('Kunde / Client') text inputs with quick-suggestion pills (data-testid='worker-event-input', data-testid='worker-client-input')",
+          "GPS Status Indicator: '📍 GPS Active: Nyhavn 17, København (Accurate to 8m)'",
+          "Check-In Action: Massive Green Ergonomic Check-In Button (data-testid='worker-checkin-button') with press animation and high-visibility text 'CHECK IN / STAMP IND'"
+        ]
+      },
+      "online_main_state": {
+        "title": "Worker Screen - Online (Active Work Session)",
+        "elements": [
+          "Inputs DISAPPEAR to prevent accidental edits during physical work",
+          "Active Work Panel (data-testid='worker-active-shift-panel'): Live Elapsed Time Counter (HH:MM:SS), 'Current Event: [Event]', 'Client: [Client]', 'Started at: [exact Danish time e.g., 08:15 CET]'",
+          "GPS Verification Badge with live pulsating green location dot",
+          "Check-Out Action: Massive Red Check-Out Button (data-testid='worker-checkout-button') with text 'CHECK OUT / STAMP UD' and secondary quick notes input before checkout confirm modal"
+        ]
+      }
+    },
+    "admin_dashboard": {
+      "sidebar_live_team_status": {
+        "title": "Live Team Status (Messenger-style real-time feed)",
+        "elements": [
+          "Header: 'Holdstatus / Team Status' with active count summary e.g. '4/8 Online'",
+          "Employee List with realtime status indicators: Green dot (Online) vs Grey dot (Offline)",
+          "Worker details: Name, current location or 'Logged off', elapsed working time",
+          "Inline Action: Red 'Force Check-out' button (data-testid='admin-force-checkout-btn-{workerId}') next to online employees to terminate forgotten sessions"
+        ]
+      },
+      "center_active_locations": {
+        "title": "Active Locations (Smart Cards Grouped by Street)",
+        "elements": [
+          "Street Group Header Card e.g. '📍 Nyhavn 17, København K' with active worker count badge e.g. '3 Workers Active'",
+          "Inside Card: List of checked-in workers at that location, showing Client Name, Event Name, Check-in Time, and calculated live shift length",
+          "Location Mismatch Alert Badge if worker GPS is > 200m away from scheduled venue address"
+        ]
+      },
+      "bottom_recent_shifts": {
+        "title": "Recent Shifts & Overrides Table (24th Settlement Queue)",
+        "elements": [
+          "Table Columns: Worker, Location, Check-In, Check-Out, Raw Minutes, 4-Hour Rule Calculated Hours, Status, Actions",
+          "Highlight Banner for 4-Hour Rule: '4-hour guarantee applied (Worked <4h credited as 4h00m)'",
+          "Action Button: '[Edit Hours / Rediger Timer]' (data-testid='admin-edit-hours-btn-{shiftId}') opening an override modal allowing the boss to manually adjust credit hours with audit log reason",
+          "Monthly Payroll Export Indicator: 'Next automated Danish payroll report: 24th at 11:00 CET'"
+        ]
+      }
+    }
+  },
+  "business_logic": {
+    "four_hour_guarantee_rule": "If raw worked time is < 4 hours (240 minutes), the calculated hours automatically credit 4.00 hours. If raw worked time is >= 4 hours, calculated hours reflect exact worked duration.",
+    "location_mismatch_alerts": "If GPS coordinates at check-in deviate significantly from client site geofence, highlight row with Amber warning badge 'Location Mismatch'.",
+    "twenty_four_hour_forgotten_checkout": "If shift exceeds 24 hours without checkout, flag shift with 'Forgotten Checkout' alert and auto-notify admin sidebar with Force Check-out pulse.",
+    "monthly_payroll_schedule": "Automated payroll calculation and CSV/PDF export scheduled for 24th of each month at 11:00 Danish Time (CET/CEST).",
+    "bilingual_support": "Single-button toggle switching all labels, buttons, dynamic dates, and status messages between English (EN) and Danish (DA)."
+  },
+  "image_urls": {
+    "worker_banner": "https://images.pexels.com/photos/15986849/pexels-photo-15986849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "copenhagen_location_1": "https://images.pexels.com/photos/30974134/pexels-photo-30974134.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "copenhagen_location_2": "https://images.pexels.com/photos/31707003/pexels-photo-31707003.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  },
+  "instructions_to_main_agent": [
+    "Strictly follow the dual-view structure: WORKER SCREEN (Mobile 100dvh experience) and ADMIN DASHBOARD (Desktop/Tablet panel view).",
+    "Provide a smooth switcher or role selector at the top navigation or demo header to easily test both WORKER SCREEN (as worker 'Kasper') and ADMIN DASHBOARD (as Manager).",
+    "Implement language state management (EN / DA) globally using context or state, so toggling language on any screen instantly updates all strings across worker and admin interfaces.",
+    "Ensure all interactive elements carry their corresponding `data-testid` attributes as specified in the wireframes section.",
+    "Store check-in and shift data in local storage / backend state so that checking in on the Worker screen immediately updates the Live Team Status sidebar and Active Locations cards in the Admin view.",
+    "Enforce the 4-hour minimum credit rule calculation in the shifts table."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur) with explicit border-white/10.",
+    "You MUST NOT apply universal transition (e.g., transition: all). Always specify explicit properties (transition-colors, transition-transform).",
+    "You MUST NOT center align the main app body text or disrupt the natural reading flow.",
+    "Always use high-visibility tactile button styles (pills or sharp industrial rounded borders with active press scale transforms).",
+    "NEVER use AI assistant emoji characters like 🤖🧠💭💡🔮🎯 for system icons. Use Lucide SVG icons instead.",
+    "Every interaction needs micro-animations - hover states, button active states, glowing online indicators.",
+    "All interactive elements MUST include `data-testid` attributes."
+  ]
+}

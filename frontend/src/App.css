@@ -1,0 +1,12 @@
+.App {
+  min-height: 100dvh;
+  background-color: #0b0f19;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(16, 185, 129, 0.35);
+}

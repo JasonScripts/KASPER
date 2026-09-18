@@ -1,0 +1,24 @@
+crons:
+  - name: forgotten-checkout
+    description: "Every hour, emails workers whose shift has been running over 24h to check out"
+    cron: "0 * * * *"
+    endpoint: "{{BASE_URL}}/api/cron/forgotten-checkout"
+    method: POST
+    # Cron endpoints must ack 2xx immediately; enqueue/background the actual work.
+    enabled: true
+  - name: monthly-payroll
+    description: "On the 24th at 11:00 Danish time, generates per-worker and company payroll summaries"
+    cron: "0 11 24 * *"
+    timezone: "Europe/Copenhagen"
+    endpoint: "{{BASE_URL}}/api/cron/monthly-payroll"
+    method: POST
+    # Cron endpoints must ack 2xx immediately; enqueue/background the actual work.
+    enabled: true
+  - name: sheet-sync
+    description: "Daily at 06:00 Danish time, syncs the worker master list from the Google Sheet"
+    cron: "0 6 * * *"
+    timezone: "Europe/Copenhagen"
+    endpoint: "{{BASE_URL}}/api/cron/sheet-sync"
+    method: POST
+    # Cron endpoints must ack 2xx immediately; enqueue/background the actual work.
+    enabled: true
