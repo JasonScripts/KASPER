@@ -34,7 +34,7 @@ from urllib.parse import urlparse
 # Config & DB
 # ---------------------------------------------------------------------------
 mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
+client = AsyncIOMotorClient(mongo_url, minPoolSize=2)
 db = client[os.environ['DB_NAME']]
 
 JWT_ALGORITHM = "HS256"
@@ -1227,11 +1227,21 @@ async def seed_admin():
             await db.users.update_one({"email": email}, {"$set": {"role": "admin"}})
 
 
+async def keep_db_alive():
+    """Folyamatosan ébren tartja az ingyenes MongoDB-t egy 5 perces pingeléssel."""
+    while True:
+        try:
+            await db.command("ping")
+        except Exception:
+            pass
+        await asyncio.sleep(300)
+
 @app.on_event("startup")
 async def startup():
     await db.users.create_index("email", unique=True)
     await db.shifts.create_index([("user_id", 1), ("status", 1)])
     await seed_admin()
+    asyncio.create_task(keep_db_alive())  # Ezt a sort adtuk hozzá
 
 
 @app.on_event("shutdown")
